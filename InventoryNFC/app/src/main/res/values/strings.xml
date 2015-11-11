@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">InventoryNFC</string>
+    <string name="save_product_button_text">Guardar producto</string>
+    <string-array name="categories_array">
+        <item>Cat 1</item>
+        <item>Cat 2</item>
+        <item>Cat 3</item>
+    </string-array>
+</resources>

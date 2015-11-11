@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="left"
+    android:padding="20dp">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/add_new_product_button"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="Inventario"
+            android:textStyle="bold"
+            android:textSize="20sp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="Nuevo producto"
+            android:id="@+id/add_new_product_button"
+            android:onClick="addProductToDB"/>
+    </RelativeLayout>
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:stretchColumns="1,2">
+        <TableRow>
+            <TextView
+                android:layout_column="1"
+                android:padding="3dp"
+                android:text="Id"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
+            <TextView
+                android:layout_column="2"
+                android:padding="3dp"
+                android:text="Nombre"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
+            <TextView
+                android:layout_column="3"
+                android:padding="3dp"
+                android:text="Categoria"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
+        </TableRow>
+        <ScrollView android:layout_height="300dp">
+            <TableLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/product_table"
+                android:stretchColumns="1,2">
+                <TableRow>
+                    <TextView
+                        android:text="Id 1"
+                        android:layout_column="1"/>
+                    <TextView
+                        android:text="Nombre 1"
+                        android:layout_column="2"/>
+                    <TextView
+                        android:text="Categoria 1"
+                        android:layout_column="3"/>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:text="Id 1"
+                        android:layout_column="1"/>
+                    <TextView
+                        android:text="Nombre 1"
+                        android:layout_column="2"/>
+                    <TextView
+                        android:text="Categoria 1"
+                        android:layout_column="3"/>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:text="Id 1"
+                        android:layout_column="1"/>
+                    <TextView
+                        android:text="Nombre 1"
+                        android:layout_column="2"/>
+                    <TextView
+                        android:text="Categoria 1"
+                        android:layout_column="3"/>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:text="Id 1"
+                        android:layout_column="1"/>
+                    <TextView
+                        android:text="Nombre 1"
+                        android:layout_column="2"/>
+                    <TextView
+                        android:text="Categoria 1"
+                        android:layout_column="3"/>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:text="Id 1"
+                        android:layout_column="1"/>
+                    <TextView
+                        android:text="Nombre 1"
+                        android:layout_column="2"/>
+                    <TextView
+                        android:text="Categoria 1"
+                        android:layout_column="3"/>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:text="Id 1"
+                        android:layout_column="1"/>
+                    <TextView
+                        android:text="Nombre 1"
+                        android:layout_column="2"/>
+                    <TextView
+                        android:text="Categoria 1"
+                        android:layout_column="3"/>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:text="Id 1"
+                        android:layout_column="1"/>
+                    <TextView
+                        android:text="Nombre 1"
+                        android:layout_column="2"/>
+                    <TextView
+                        android:text="Categoria 1"
+                        android:layout_column="3"/>
+                </TableRow>
+            </TableLayout>
+        </ScrollView>
+    </TableLayout>
+
+</LinearLayout>
