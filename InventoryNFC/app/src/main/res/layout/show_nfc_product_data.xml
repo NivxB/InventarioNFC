@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="start"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:paddingBottom="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="Lectura NFC"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre del producto:"/>
+        <EditText
+            android:layout_width="185dp"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            android:id="@+id/read_nfc_product_name"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Código de barras:"/>
+        <EditText
+            android:layout_width="185dp"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:id="@+id/read_nfc_barcode"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Precio de compra:"/>
+        <EditText
+            android:layout_width="185dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:editable="false"
+            android:id="@+id/read_nfc_purchase_price"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Precio de venta:"/>
+        <EditText
+            android:layout_width="185dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:editable="false"
+            android:id="@+id/read_nfc_sell_price"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Categoria:"/>
+        <EditText
+            android:layout_width="185dp"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:id="@+id/read_nfc_catergory"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cantidad:"/>
+        <EditText
+            android:layout_width="185dp"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:id="@+id/read_nfc_quantity"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="20dp">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nfc_product_data_button"
+            android:onClick="addNFCProductDataToDB"/>
+    </LinearLayout>
+
+</LinearLayout>

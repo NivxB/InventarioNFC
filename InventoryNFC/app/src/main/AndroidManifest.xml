@@ -23,6 +23,14 @@
         <activity android:name=".Inventory"
             android:label="Inventario"
             android:theme="@style/AppTheme" />
+
+        <activity android:name=".ReadNFC"
+            android:label="Leer NFC"
+            android:theme="@style/AppTheme" />
+
+        <activity android:name=".ResultNFCReading"
+            android:label="Resultado de la lectura"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

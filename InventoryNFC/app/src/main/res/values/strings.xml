@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">InventoryNFC</string>
     <string name="save_product_button_text">Guardar producto</string>
+    <string name="read_nfc_sticker">Leer NFC</string>
+    <string name="nfc_product_data_button">Aceptar</string>
     <string-array name="categories_array">
         <item>Cat 1</item>
         <item>Cat 2</item>

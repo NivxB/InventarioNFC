@@ -14,19 +14,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void onGetNameClick(View view) {
-        Intent getNameScreenIntent = new Intent(this, AddProduct.class);
-
-        final int result = 1;
-        startActivityForResult(getNameScreenIntent, result);
-        //startActivity(getNameScreenIntent);
-    }
-
     public void showInventory(View view) {
         Intent getInventoryScreenIntent = new Intent(this, Inventory.class);
 
         final int result = 1;
         //startActivityForResult(getInventoryScreenIntent, result);
         startActivity(getInventoryScreenIntent);
+    }
+
+    public void onAddNFCProducts(View view) {
+        Intent readNFCScreenIntent = new Intent(this, ReadNFC.class);
+        final int result = 1;
+        startActivity(readNFCScreenIntent);
     }
 }
