@@ -45,7 +45,7 @@
             android:layout_width="185dp"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
-            android:id="@+id/purchase_price_edit_text"/>
+            android:id="@+id/purchase_price_edit_text" />
     </LinearLayout>
 
     <LinearLayout
@@ -60,7 +60,7 @@
             android:layout_width="185dp"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
-            android:id="@+id/sell_price_edit_e"/>
+            android:id="@+id/sell_price_edit_e" />
     </LinearLayout>
 
     <LinearLayout
@@ -74,7 +74,8 @@
         <Spinner
             android:layout_width="185dp"
             android:layout_height="wrap_content"
-            android:id="@+id/categories_spinner"/>
+            android:id="@+id/categories_spinner"
+            android:spinnerMode="dropdown" />
     </LinearLayout>
 
     <LinearLayout
