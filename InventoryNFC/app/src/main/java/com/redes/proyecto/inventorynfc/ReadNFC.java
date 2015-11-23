@@ -112,7 +112,7 @@ public class ReadNFC extends Activity{
             if (MIME_TEXT_PLAIN.equals(type)) {
 
                 Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-                new NdefReaderTask().execute(tag);
+                new NdefReaderTask(this).execute(tag);
 
             } else {
                 Log.d("TAG", "Wrong mime type: " + type);
@@ -126,7 +126,7 @@ public class ReadNFC extends Activity{
 
             for (String tech : techList) {
                 if (searchedTech.equals(tech)) {
-                    new NdefReaderTask().execute(tag);
+                    new NdefReaderTask(this).execute(tag);
                     break;
                 }
             }

@@ -4,6 +4,7 @@ package com.redes.proyecto.inventorynfc;
  * Created by Kevin Barahona on 11/15/2015.
  */
 
+import android.app.Activity;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.Tag;
@@ -23,6 +24,12 @@ import java.util.Arrays;
  *
  */
 public class NdefReaderTask extends AsyncTask<Tag, Void, String> {
+
+    private Activity Actividad;
+
+    public NdefReaderTask(Activity actividad) {
+        Actividad = actividad;
+    }
 
     @Override
     protected String doInBackground(Tag... params) {
@@ -80,7 +87,7 @@ public class NdefReaderTask extends AsyncTask<Tag, Void, String> {
     @Override
     protected void onPostExecute(String result) {
         if (result != null) {
-            Toast.makeText(null,result,Toast.LENGTH_LONG).show();
+            Toast.makeText(Actividad,result,Toast.LENGTH_LONG).show();
         }
     }
 
