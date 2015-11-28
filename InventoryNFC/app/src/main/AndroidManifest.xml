@@ -33,6 +33,10 @@
         <activity android:name=".ResultNFCReading"
             android:label="Resultado de la lectura"
             android:theme="@style/AppTheme" />
+
+        <activity android:name=".Orders"
+            android:label="Resultado de la lectura"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:gravity="left"
     android:padding="20dp">
-
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,20 +19,20 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:gravity="center"
-            android:text="Inventario"
+            android:text="Órdenes de Compra"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:id="@+id/textView"
-            android:layout_toStartOf="@+id/add_new_product_button"
-            android:layout_toLeftOf="@+id/add_new_product_button" />
+            android:id="@+id/textViewOrders"
+            android:layout_toStartOf="@+id/add_new_order_button"
+            android:layout_toLeftOf="@+id/add_new_order_button" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nuevo producto"
-            android:id="@+id/add_new_product_button"
-            android:onClick="addProductToDB"
-            android:layout_alignTop="@+id/textView"
+            android:text="Nueva orden"
+            android:id="@+id/add_new_order_button"
+            android:onClick="addOrderToDB"
+            android:layout_alignTop="@+id/textViewOrders"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
@@ -48,32 +48,36 @@
             android:layout_width="wrap_content"
             android:layout_height="278dp"
             android:paddingTop="20dp"
-            android:stretchColumns="0,1"
-            android:id="@+id/inventory_table_layout"
+            android:stretchColumns="1,2,3"
+            android:id="@+id/orders_table_layout"
             android:layout_weight="1">
             <TableRow>
                 <TextView
                     android:layout_column="0"
                     android:padding="3dp"
-                    android:text="Id"
+                    android:text="N. Compra"
                     android:textStyle="bold"
                     android:textSize="15sp"/>
                 <TextView
                     android:layout_column="1"
                     android:padding="3dp"
-                    android:text="Nombre"
+                    android:text="Productos"
                     android:textStyle="bold"
                     android:textSize="15sp"/>
                 <TextView
                     android:layout_column="2"
                     android:padding="3dp"
-                    android:text="Categoria"
+                    android:text="Fecha"
+                    android:textStyle="bold"
+                    android:textSize="15sp"/>
+                <TextView
+                    android:layout_column="3"
+                    android:padding="3dp"
+                    android:text="Total"
                     android:textStyle="bold"
                     android:textSize="15sp"/>
             </TableRow>
 
         </TableLayout>
     </ScrollView>
-
-
 </LinearLayout>

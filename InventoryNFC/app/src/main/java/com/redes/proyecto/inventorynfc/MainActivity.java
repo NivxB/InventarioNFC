@@ -30,4 +30,10 @@ public class MainActivity extends AppCompatActivity {
         final int result = 1;
         startActivity(readNFCScreenIntent);
     }
+
+    public void showOrders(View view) {
+        Intent getOrdersScreenIntent = new Intent(this, Orders.class);
+        //startActivityForResult(getInventoryScreenIntent, result);
+        startActivity(getOrdersScreenIntent);
+    }
 }
