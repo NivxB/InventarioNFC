@@ -31,7 +31,8 @@
             android:layout_height="wrap_content"
             android:inputType="none"
             android:id="@+id/read_nfc_product_name"
-            android:editable="true" />
+            android:editable="true"
+            android:enabled="true" />
     </LinearLayout>
 
     <LinearLayout
@@ -46,7 +47,8 @@
             android:layout_width="185dp"
             android:layout_height="wrap_content"
             android:editable="true"
-            android:id="@+id/read_nfc_barcode"/>
+            android:id="@+id/read_nfc_barcode"
+            android:enabled="true" />
     </LinearLayout>
 
     <LinearLayout
@@ -62,7 +64,8 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:editable="true"
-            android:id="@+id/read_nfc_purchase_price"/>
+            android:id="@+id/read_nfc_purchase_price"
+            android:enabled="true" />
     </LinearLayout>
 
     <LinearLayout
@@ -78,7 +81,8 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:editable="true"
-            android:id="@+id/read_nfc_sell_price"/>
+            android:id="@+id/read_nfc_sell_price"
+            android:enabled="true" />
     </LinearLayout>
 
     <LinearLayout
@@ -93,7 +97,8 @@
             android:layout_width="185dp"
             android:layout_height="wrap_content"
             android:editable="true"
-            android:id="@+id/read_nfc_catergory"/>
+            android:id="@+id/read_nfc_catergory"
+            android:enabled="true" />
     </LinearLayout>
 
     <LinearLayout
@@ -103,24 +108,19 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cantidad:"/>
+            android:text="Cantidad en inventario:"/>
         <EditText
             android:layout_width="185dp"
             android:layout_height="wrap_content"
             android:editable="true"
-            android:id="@+id/read_nfc_quantity"/>
+            android:id="@+id/read_nfc_quantity"
+            android:enabled="true" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:paddingTop="20dp">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/nfc_product_data_button"
-            android:onClick="addNFCProductDataToDB"/>
-    </LinearLayout>
+        android:paddingTop="20dp"></LinearLayout>
 
 </LinearLayout>

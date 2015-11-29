@@ -3,6 +3,7 @@ package com.redes.proyecto.inventorynfc;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TableLayout;
@@ -39,6 +40,8 @@ public class Orders extends Activity{
 
     }
     public void fillTable(){
+        TableLayout tl = (TableLayout) findViewById(R.id.orders_table_layout);
+        tl.removeAllViews();
         final Orders self=this;
         String url="http://fia.unitec.edu:8082/InventarioRedes/phpFiles/getOrders.php";
         OkHttpClient client = new OkHttpClient();
@@ -56,27 +59,29 @@ public class Orders extends Activity{
                 if (!response.isSuccessful())
                     throw new IOException("Unexpected code " + response);
 
-                final String finalResponse=response.body().string();
+                final String finalResponse = response.body().string();
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         try {
                             JSONArray orders = new JSONArray(finalResponse);
+                            renderTableHeader(self);
                             for (int i = 0; i < orders.length(); i++) {
                                 JSONObject invRegiter = new JSONObject(orders.get(i).toString());
                                 String code = invRegiter.getString("order_number");
                                 JSONArray products = invRegiter.getJSONArray("products");
-                                String productsNames="";
+                                String productsNames = "";
                                 String date = invRegiter.getString("order_date");
-                                double total=0;
-                                for(int j=0;j<products.length();j++){
+                                double total = 0;
+                                for (int j = 0; j < products.length(); j++) {
                                     JSONObject prodRegister = products.getJSONObject(j);
-                                    if(j<products.length()-1) {
+                                    if (j < products.length() - 1) {
                                         productsNames += prodRegister.getString("product_name") + ", ";
-                                    }else{
+                                    } else {
                                         productsNames += prodRegister.getString("product_name");
                                     }
-                                    total+=prodRegister.getDouble("purchase_price");
+                                    int quantity = prodRegister.getInt("quantity");
+                                    total += prodRegister.getDouble("purchase_price") * quantity;
                                 }
                                 renderTable(self, code, productsNames, date, total, i);
                             }
@@ -114,5 +119,37 @@ public class Orders extends Activity{
 
         tl.addView(tr, i + 1);
 
+    }
+
+    public void renderTableHeader(Context self){
+        TableLayout tl = (TableLayout) findViewById(R.id.orders_table_layout);
+
+        TableRow trHeader = new TableRow(self);
+
+        TextView headerOrder = new TextView(self);
+        headerOrder.setText("N. Compra");
+        headerOrder.setTypeface(null, Typeface.BOLD);
+        headerOrder.setPadding(2, 0, 5, 0);
+        trHeader.addView(headerOrder);
+
+        TextView headerProducts = new TextView(self);
+        headerProducts.setText("Productos");
+        headerProducts.setTypeface(null, Typeface.BOLD);
+        headerProducts.setPadding(2, 0, 5, 0);
+        trHeader.addView(headerProducts);
+
+        TextView headerDate = new TextView(self);
+        headerDate.setText("Fecha");
+        headerDate.setTypeface(null, Typeface.BOLD);
+        headerDate.setPadding(2, 0, 5, 0);
+        trHeader.addView(headerDate);
+
+        TextView headerTotal = new TextView(self);
+        headerTotal.setText("Total");
+        headerTotal.setTypeface(null, Typeface.BOLD);
+        headerTotal.setPadding(2, 0, 5, 0);
+        trHeader.addView(headerTotal);
+
+        tl.addView(trHeader, 0);
     }
 }

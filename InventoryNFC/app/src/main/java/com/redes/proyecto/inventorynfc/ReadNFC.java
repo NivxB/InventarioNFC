@@ -37,14 +37,6 @@ public class ReadNFC extends Activity{
         handleIntent(getIntent());
     }
 
-    //TODO: codigo para leer un sticker nfc
-    public void readNFCSticker() {
-        //...
-        Intent showProductDataScreenIntent = new Intent(this, ResultNFCReading.class);
-        startActivity(showProductDataScreenIntent);
-        //...
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

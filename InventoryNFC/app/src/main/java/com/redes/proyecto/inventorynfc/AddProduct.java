@@ -9,11 +9,17 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
+
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 
@@ -28,6 +34,16 @@ public class AddProduct extends Activity {
 
         setContentView(R.layout.add_product);
 
+        TextView txtBarcode=(TextView)findViewById(R.id.barcode_edit_text);
+        String barcode="";
+        Bundle extras = getIntent().getExtras();
+        if(extras == null) {
+            barcode= "";
+        } else {
+            barcode= extras.getString("product_barcode");
+            txtBarcode.setEnabled(false);
+        }
+        txtBarcode.setText(barcode);
         Spinner categories_spinner = (Spinner)findViewById(R.id.categories_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.categories_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -46,14 +62,13 @@ public class AddProduct extends Activity {
             Double productSellPrice = Double.parseDouble(productSellPriceEditText.getText().toString());
             final Product product=new Product(0,productBarcode,productName,productPurchasePrice,productSellPrice,2);
             //Log.d("Product", product.toString());
-            Thread t=new Thread(new Runnable(){
+            Thread t = new Thread(new Runnable() {
                 @Override
-                public void run(){
-                    String json;
-                    json = product.toJson();
+                public void run() {
                     try {
-                        post("http://fia.unitec.edu:8082/InventarioRedes/phpFiles/insertProduct.php",json);
-                    } catch (IOException e) {
+                        JSONObject json = new JSONObject(product.toJson());
+                        post("http://fia.unitec.edu:8082/InventarioRedes/phpFiles/insertProduct.php", json);
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
@@ -82,17 +97,38 @@ public class AddProduct extends Activity {
     }
 
 
-    String post(String url, String json) throws IOException {
+    public void post(String url, JSONObject json) throws Exception {
         OkHttpClient client = new OkHttpClient();
-        final MediaType JSON= MediaType.parse("application/json; charset=utf-8");
-        RequestBody body = RequestBody.create(JSON, json);
+        //final MediaType JSON= MediaType.parse("application/json; charset=utf-8");
+        //RequestBody body = RequestBody.create(JSON, json);
+        RequestBody formBody = new FormEncodingBuilder()
+                .add("product_barcode", json.getString("product_barcode"))
+                .add("product_name", json.getString("product_name"))
+                .add("product_category", json.getString("product_category"))
+                .add("purchase_price", json.getString("purchase_price"))
+                .add("sell_price", json.getString("sell_price"))
+                .build();
         //Log.d("JSON",json);
         Request request = new Request.Builder()
                 .url(url)
-                .post(body)
+                .post(formBody)
                 .build();
-        Response response = client.newCall(request).execute();
-        return response.body().string();
+        final Response response = client.newCall(request).execute();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    final String result=response.body().string();
+                    if(result.split(";")[0].split(":")[1].equals("0")){
+                        Toast.makeText(AddProduct.this, "El producto fue ingresado anteriormente", Toast.LENGTH_LONG).show();
+                    }else{
+                        Toast.makeText(AddProduct.this, "Se ha ingresado un nuevo producto al inventario", Toast.LENGTH_LONG).show();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
 

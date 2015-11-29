@@ -3,6 +3,7 @@ package com.redes.proyecto.inventorynfc;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.Ndef;
@@ -33,7 +34,6 @@ public class Inventory extends Activity{
     @Override
     protected void onResume(){
         super.onResume();
-        TableLayout tl = (TableLayout)findViewById(R.id.inventory_table_layout);
         fillTable();
     }
     public void addProductToDB(View view) {
@@ -44,6 +44,8 @@ public class Inventory extends Activity{
 
     }
     public void fillTable(){
+        TableLayout tl = (TableLayout)findViewById(R.id.inventory_table_layout);
+        tl.removeAllViews();
         final Inventory self=this;
         String url="http://fia.unitec.edu:8082/InventarioRedes/phpFiles/getInventory.php";
         OkHttpClient client = new OkHttpClient();
@@ -61,18 +63,20 @@ public class Inventory extends Activity{
                 if (!response.isSuccessful())
                     throw new IOException("Unexpected code " + response);
 
-                final String finalResponse=response.body().string();
+                final String finalResponse = response.body().string();
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         try {
                             JSONArray inventory = new JSONArray(finalResponse);
+                            renderTableHeader(self);
                             for (int i = 0; i < inventory.length(); i++) {
                                 JSONObject invRegiter = new JSONObject(inventory.get(i).toString());
                                 String barcode = invRegiter.getString("product_barcode");
                                 String name = invRegiter.getString("product_name");
-                                String category = invRegiter.getString("category_name");
-                                renderTable(self, barcode, name, category, i);
+                                String quantity = invRegiter.getString("quantity");
+                                String past_quantity = invRegiter.getString("past_quantity");
+                                renderTable(self, barcode, name, quantity, past_quantity, i);
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -82,8 +86,9 @@ public class Inventory extends Activity{
             }
         });
     }
-    public void renderTable(Context self,String barcode,String name,String category, int i){
+    public void renderTable(Context self,String barcode,String name,String quantity,String pastQuantity, int i){
         TableLayout tl = (TableLayout) findViewById(R.id.inventory_table_layout);
+
         TableRow tr = new TableRow(self);
 
         TextView labelBarcode = new TextView(self);
@@ -96,12 +101,47 @@ public class Inventory extends Activity{
         labelName.setPadding(2, 0, 5, 0);
         tr.addView(labelName);
 
-        TextView labelCategory = new TextView(self);
-        labelCategory.setText(category);
-        labelCategory.setPadding(2, 0, 5, 0);
-        tr.addView(labelCategory);
+        TextView labelQuantity = new TextView(self);
+        labelQuantity.setText(quantity);
+        labelQuantity.setPadding(2, 0, 5, 0);
+        tr.addView(labelQuantity);
 
-        tl.addView(tr, i + 1);
+        TextView labelPastQuantity = new TextView(self);
+        labelPastQuantity.setText(pastQuantity);
+        labelPastQuantity.setPadding(2, 0, 5, 0);
+        tr.addView(labelPastQuantity);
 
+        tl.addView(tr, i+1);
+    }
+    public void renderTableHeader(Context self){
+        TableLayout tl = (TableLayout) findViewById(R.id.inventory_table_layout);
+
+        TableRow trHeader = new TableRow(self);
+
+        TextView headerBarcode = new TextView(self);
+        headerBarcode.setText("Código");
+        headerBarcode.setTypeface(null, Typeface.BOLD);
+        headerBarcode.setPadding(2, 0, 5, 0);
+        trHeader.addView(headerBarcode);
+
+        TextView headerName = new TextView(self);
+        headerName.setText("Nombre");
+        headerName.setTypeface(null, Typeface.BOLD);
+        headerName.setPadding(2, 0, 5, 0);
+        trHeader.addView(headerName);
+
+        TextView headerQuantity = new TextView(self);
+        headerQuantity.setText("Cantidad");
+        headerQuantity.setTypeface(null, Typeface.BOLD);
+        headerQuantity.setPadding(2, 0, 5, 0);
+        trHeader.addView(headerQuantity);
+
+        TextView headerPastQuantity = new TextView(self);
+        headerPastQuantity.setText("Cantidad Anterior");
+        headerPastQuantity.setTypeface(null, Typeface.BOLD);
+        headerPastQuantity.setPadding(2, 0, 5, 0);
+        trHeader.addView(headerPastQuantity);
+
+        tl.addView(trHeader, 0);
     }
 }
